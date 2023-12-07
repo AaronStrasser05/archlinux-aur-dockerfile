@@ -2,13 +2,15 @@ FROM archlinux:latest
 
 RUN pacman -Syyu --noconfirm base-devel git vim
 
-RUN useradd -m USER && \
-    passwd -d PASSWORD && \
-    printf 'USER ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+RUN useradd -m docker_user && \
+    passwd -d docker_user && \
+    printf 'docker_user ALL=(ALL) ALL\n' | tee -a /etc/sudoers
 
-RUN mkdir /AUR
+USER root
 
-USER USER
+RUN mkdir /AUR && chown docker_user:docker_user /AUR
+
+USER docker_user
 
 WORKDIR /AUR
 
