@@ -23,3 +23,5 @@ RUN makepkg -si --noconfirm
 USER root
 
 WORKDIR /
+
+sudo docker run --privileged -v /run/systemd/system:/run/systemd/system -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket -it archlinux:latest systemctl
